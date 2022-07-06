@@ -105,6 +105,7 @@ main(){
 					printf("\tResultado del giro \n");
 					printf("\t%s\t%s\t%s\n", linea[0], linea[1], linea[2]); //linea, lineas
 					printf("===========================================\n");
+					matchwin(linea);
 					system("pause");
 					system("cls");
 					break;
@@ -203,4 +204,39 @@ int random_char()
 	}
 	return value;
    //return min + rand() % (max+1 - min);
+}
+
+int busqueda(char **linea){
+	
+	int n = 5, match, i, j;
+	for(i = 0; i < n;i++){
+		int count = 0;
+		char *character = symbols[i];
+		for(j=0; j < 3;j++){
+			if (strcmp(character,linea[j])==0){
+				count++;
+			}			
+		}
+		if (count > match){
+				match = count;	
+			}
+	}
+	return match;
+}
+
+void matchwin(char **resultado) {
+	int matches = busqueda(resultado);
+
+		if (matches == 1)
+		{
+			printf("Intenta de nuevo");
+		}
+		if (matches == 2)
+		{
+			printf("Pegaste 2 ");
+		}
+		if (matches > 3)
+		{
+			printf("Lechuo! ganaste");
+		}
 }
