@@ -84,8 +84,11 @@ main(){
 						{
 							//if (k > 5 );
 							//index = 0;
-							linea += symbols[k]; //index
-							printf(" %c \t  %c \t %c", linea, symbols[k]); //linea
+							//linea += symbols[k]; //index
+							printf("===========================================\n");
+							printf("\t INICIANDO EL GIRO...\n");
+							printf("===========================================\n");
+							printf(" %c \t  %c \t %c",symbols[k],symbols[k],symbols[k]); //linea
 							Sleep(75); //Tiempo para cada roll
 							system("cls");
 							k++;
