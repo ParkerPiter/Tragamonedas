@@ -246,13 +246,15 @@ void matchwin(char **resultado) {
 
 		if (matches == 1 || matches == 2)
 		{
-			printf("Intenta de nuevo \n");
-			apuesta -= apuesta;
+			printf("\tIntente de nuevo \n");
+			printf("===========================================\n");
+			apuesta -= apuesta; //Resta toda la apuesta si pierde
 		}
 		
 		if (matches > 3)
 		{
-			printf("Lechuo! ganaste \n");
-			apuesta += apuesta;
+			printf("\tLo lograste ganaste!! \n");
+			printf("===========================================\n");
+			apuesta += apuesta; //suma el doble si ganas
 		}
 }
