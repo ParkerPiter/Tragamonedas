@@ -15,14 +15,14 @@
 #define c 05 
 
 //Validación
-int validar_numero(char numero[]);
+int validar_numero(char numero[]), N = 20;
 
 main(){
 	char numero[5]; //variable que captura como char o string
 	int n, numerovalido; //variables de tipo entero
 	int i, j, k; // iteradores
 	int  apuestaopc, intentos = 0; //variables del juego
-	int opc, num, N = 20, numero_maximo = 10, randNumber, index, diaspartidas; //Roll
+	int opc, num, numero_maximo = 10, randNumber, index, diaspartidas; //Roll
 	char symbols [5] = { '(' , '!', '#', '$', '%' }; //Simbolos
 	char linea = ' ';//espacios en el roll
 	//Dinero
@@ -32,6 +32,9 @@ main(){
 	archivomoney=fopen("archivoprin.txt","a+"); //Se abre el archivo
 	fprintf(archivomoney, "%s\n"); //,ctime(&tiempoahora) 
 	
+	
+	randNumber = random_int();//rand() ; //el numero de vueltas
+	num=rand() % numero_maximo;
 	do{
 			printf("===========================================\n");
 			printf("\t Maquina tragamonedas!\n");
@@ -42,6 +45,7 @@ main(){
 			
 			//menu de inicio
 			menu:
+			printf("%d", randNumber);
 			printf("\t Menu \n");
 			printf("1. Iniciar juego \n");
 			printf("2. Ver como se juega\n");
@@ -72,13 +76,13 @@ main(){
 					printf("INICIANDO EL GIRO...\n");*/
 					
 					//Roll
+					
 					for (i = 0; i < 3; i++)
 					{
-						printf("%d", randNumber);
+						//printf("%d", randNumber);
 						k = 0; //index = 0;
 						for (j = 0; j < randNumber; j++) //numero de giros que hará 
 						{
-							
 							//if (k > 5 );
 							//index = 0;
 							linea += symbols[k]; //index
@@ -91,7 +95,7 @@ main(){
 						linea += symbols[num - 1];
 		
 						num=rand() % numero_maximo; //el numero segun la posición del simbolo
-						randNumber = rand() % N; //el numero de vueltas
+						randNumber = random_int(); //el numero de vueltas
 					}
 					printf("===========================================\n");
 					printf("\t	Resultado del giro \n");
@@ -155,4 +159,22 @@ int validar_numero(char numero[]){
 		}
 	}
 	return 1;
+}
+
+//Metodo un minimo y un maximo
+int random_int()
+{
+	int value = 0;
+	int r = 0;
+	while(1 == 1){
+		srand(time(NULL));
+		r = rand() % N;
+		//printf("%d \n", r);
+		if( r > 0 && r < N  ){
+			value = r;
+			break; 
+		}
+	}
+	return value;
+   //return min + rand() % (max+1 - min);
 }
