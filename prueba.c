@@ -16,15 +16,15 @@
 
 //Validación
 int validar_numero(char numero[]), N = 20;
+char *symbols [5] = { "(" , "!", "#", "$", "%" }; //Simbolos
 
 main(){
 	char numero[5]; //variable que captura como char o string
 	int n, numerovalido; //variables de tipo entero
 	int i, j, k; // iteradores
 	int  apuestaopc, intentos = 0; //variables del juego
-	int opc, num, numero_maximo = 10, randNumber, index, diaspartidas; //Roll
-	char symbols [5] = { '(' , '!', '#', '$', '%' }; //Simbolos
-	char linea = ' ';//espacios en el roll
+	int opc, num, randNumber, index, diaspartidas; //Roll
+	char *linea[3];//espacios en el roll
 	//Dinero
 	float dineroT, dineroEn, dineroD; //time_t tiempoahora
 	//Archivo
@@ -34,9 +34,12 @@ main(){
 	
 	
 	randNumber = random_int();//rand() ; //el numero de vueltas
-	num=rand() % numero_maximo;
+	num= random_char();
 	do{		
 			menu:
+			linea[0] = "";
+			linea[1] = "";
+			linea[2] = "";
 			printf("===========================================\n");
 			printf("\t Maquina tragamonedas!\n");
 			printf("===========================================\n");	
@@ -79,29 +82,28 @@ main(){
 					for (i = 0; i < 3; i++)
 					{
 						//printf("%d", randNumber);
-						k = 0; //index = 0;
+						//index = 0;
 						for (j = 0; j < randNumber; j++) //numero de giros que hará 
 						{
 							//if (k > 5 );
 							//index = 0;
 							//linea += symbols[k]; //index
 							printf("===========================================\n");
-							printf("\t INICIANDO EL GIRO...\n");
+							printf("\tINICIANDO EL GIRO...\n");
 							printf("===========================================\n");
-							printf(" %c \t  %c \t %c",symbols[k],symbols[k],symbols[k]); //linea
+							printf("\t%s\t%s\t%s",symbols[random_char()],symbols[random_char()],symbols[random_char()]); //linea
 							Sleep(75); //Tiempo para cada roll
 							system("cls");
-							k++;
 						}
 		
-						linea += symbols[num - 1];
+						linea[i] = symbols[num];
 		
-						num=rand() % numero_maximo; //el numero segun la posición del simbolo
+						num= random_char(); //el numero segun la posición del simbolo
 						randNumber = random_int(); //el numero de vueltas
 					}
 					printf("===========================================\n");
-					printf("\t	Resultado del giro \n");
-					printf(" \t %c	 %c	 %c \n", linea, linea); //linea, lineas
+					printf("\tResultado del giro \n");
+					printf("\t%s\t%s\t%s\n", linea[0], linea[1], linea[2]); //linea, lineas
 					printf("===========================================\n");
 					system("pause");
 					system("cls");
@@ -176,6 +178,25 @@ int random_int()
 		r = rand() % N;
 		//printf("%d \n", r);
 		if( r > 0 && r < N  ){
+			value = r;
+			break; 
+		}
+	}
+	return value;
+   //return min + rand() % (max+1 - min);
+}
+
+//Metodo random char
+int random_char()
+{
+	//int len= sizeof(symbols) / sizeof(char);//Calcular el tamaño del valor del simbolo
+	int value = 0;
+	int r = 0;
+	while(1 == 1){
+		srand(time(NULL));
+		r = rand() % 5 ;
+		//printf("%d \n", r);
+		if( r < 5 ){
 			value = r;
 			break; 
 		}
