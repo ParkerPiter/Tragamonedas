@@ -35,7 +35,8 @@ main(){
 	
 	randNumber = random_int();//rand() ; //el numero de vueltas
 	num=rand() % numero_maximo;
-	do{
+	do{		
+			menu:
 			printf("===========================================\n");
 			printf("\t Maquina tragamonedas!\n");
 			printf("===========================================\n");	
@@ -44,8 +45,6 @@ main(){
 			printf("===========================================\n");
 			
 			//menu de inicio
-			menu:
-			printf("%d", randNumber);
 			printf("\t Menu \n");
 			printf("1. Iniciar juego \n");
 			printf("2. Ver como se juega\n");
@@ -136,8 +135,11 @@ main(){
 	printf("Quiere volver a menu? \n");
 	printf("1. Si \n");
 	printf("2. No \n");
-	scanf("%d", opc);
+	printf("Ingrese una de las opciones: ");
+	scanf("%d", &opc);
+	system("cls");
 	if(opc == 1){
+		opc = 0;
 		goto menu;
 	}
 	end: 
