@@ -1,0 +1,11 @@
+@Æ
+El registro de partidas diarias de hoy es de: -1 partidas
+El dinero ingresado hoy es de: -1.$$
+El dinero de hoy ingresado por apuesta es de: 25.0$
+El dinero entregado a ganadores hoy es de: 0.0$
+@
+@
+El registro de partidas diarias de hoy es de: 1 partidas
+El dinero ingresado hoy es de: -1.$$
+El dinero de hoy ingresado por apuesta es de: 50.0$
+El dinero entregado a ganadores hoy es de: -1.$$

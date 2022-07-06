@@ -23,13 +23,13 @@ main(){
 	int n, numerovalido; //variables de tipo entero
 	int i, j, k; // iteradores
 	int  apuestaopc, intentos = 0; //variables del juego
-	int opc, num, randNumber, index, diaspartidas; //Roll
+	int opc, num, randNumber, index, diaspartidas=0; //Roll
 	char *linea[3];//espacios en el roll
 	//Dinero
 	float dineroT, dineroEn, dineroD; //time_t tiempoahora
 	//Archivo
 	FILE *archivomoney;
-	archivomoney=fopen("archivoprin.txt","a+"); //Se abre el archivo
+	archivomoney=fopen("archivomoney.txt","a+"); //Se abre el archivo
 	fprintf(archivomoney, "%s\n"); //,ctime(&tiempoahora) 
 	
 	
@@ -73,12 +73,11 @@ main(){
 					printf("Ingrese la cantidad para apostar: \n");
 					scanf("%f", &dineroD);
 					system("cls");
-					/*printf("SU APUESTA \n");
-					/*printf("Su saldo es de: %.2f \n\n", dineroD);
-					printf("INICIANDO EL GIRO...\n");*/
-					
+					printf("SU APUESTA \n");
+					printf("Su saldo es de: %.2f \n\n", dineroD);
+					system("cls");
+					diaspartidas ++;
 					//Roll
-					
 					for (i = 0; i < 3; i++)
 					{
 						//printf("%d", randNumber);
@@ -120,6 +119,7 @@ main(){
 					break;
 					
 			case 3: //ARCHIVO
+					printf("diaspartidas: %d dineroT:%.1f dineroD:%.1f dineroEn:%.1f", diaspartidas, dineroT, dineroD, dineroEn);
 					fprintf (archivomoney, "El registro de partidas diarias de hoy es de: %d partidas\n", diaspartidas);
 					fprintf(archivomoney,"El dinero ingresado hoy es de: %.1f$\n", dineroT);
 					fprintf(archivomoney,"El dinero de hoy ingresado por apuesta es de: %.1f$\n", dineroD);
@@ -227,16 +227,13 @@ int busqueda(char **linea){
 void matchwin(char **resultado) {
 	int matches = busqueda(resultado);
 
-		if (matches == 1)
+		if (matches == 1 || matches == 2)
 		{
-			printf("Intenta de nuevo");
+			printf("Intenta de nuevo \n");
 		}
-		if (matches == 2)
-		{
-			printf("Pegaste 2 ");
-		}
+		
 		if (matches > 3)
 		{
-			printf("Lechuo! ganaste");
+			printf("Lechuo! ganaste \n");
 		}
 }
