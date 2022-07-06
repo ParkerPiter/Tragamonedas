@@ -24,8 +24,7 @@ main(){
 	char numero[5]; //variable que captura como char o string
 	int n, numerovalido; //variables de tipo entero
 	int i, j, k; // iteradores
-	int  apuestaopc, intentos = 0; //variables del juego
-	int opc, num, randNumber, index, diaspartidas=0; //Roll
+	int opc, num, randNumber, diaspartidas=0; //Roll
 	char *linea[3];//espacios en el roll
 	float dineroT, dineroEn, dineroD; //Dinero
 	
@@ -34,7 +33,7 @@ main(){
 	archivomoney=fopen("archivomoney.txt","a+"); //Se abre el archivo
 	fprintf(archivomoney, "%s\n"); 
 	
-	//Inicializacion de numeros aleatoreos
+	//Inicializacion de numeros aleatorios
 	randNumber = random_int();//el numero de vueltas
 	num= random_char();//el numero del simbolo en el array
 	do{		
@@ -117,7 +116,7 @@ main(){
 			case 2: //Mensaje de como funciona o en que consiste el juego
 					printf("\t El juego consiste en que el jugador acciona la palanca para comenzar el juego, \n");
 					printf("\t se veran 3 ruedas a traves del vidrio en las cuales habran distintas figuras \n");
-					printf("\t estas rudas giraran una cantidad de tiempo y luego se detendran en una de las figuras \n");
+					printf("\t estas ruedas giraran una cantidad de tiempo y luego se detendran en una de las figuras \n");
 					printf("\t si se aciertan 3, ganas mas de lo apostado :) , de lo contrario pierdes tu apuesta :(  \n");
 					system("pause");
 					system("cls");
@@ -144,7 +143,9 @@ main(){
 							
 			case 5: //SALIDA
 					salida:
-					printf("Saliendo...\n");
+					printf("===========================================\n");
+					printf("\tVuelva pronto, saliendo...\n");
+					printf("===========================================\n");
 					system("pause");
 					goto end;
 			
