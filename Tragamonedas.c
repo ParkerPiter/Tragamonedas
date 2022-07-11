@@ -1,6 +1,5 @@
 //Universidad Santa Maria
-//Gabrie Leal
-//V-29.797.492
+//Elaborado por Gabrie Leal
 // Proyecto de laboratorio de programación
 // Maquina tragamonedas
 #include <stdio.h>
@@ -10,23 +9,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define a 03 
-#define b 04 
-#define c 05 
-
-
 int validar_numero(char numero[]);//Validación
-int N = 20;
+int N = 20, win = 0, fail = 0;
 float apuesta;
 char *symbols [5] = { "(" , "!", "#", "$", "%" }; //Simbolos
 
 main(){
-	char numero[5]; //variable que captura como char o string
+	char numero[5], opc[5]; //variable que captura como char o string
 	int n, numerovalido; //variables de tipo entero
 	int i, j, k; // iteradores
-	int opc, num, randNumber, diaspartidas=0; //Roll
+	int num, randNumber, diaspartidas=0; //Roll
 	char *linea[3];//espacios en el roll
-	float dineroT, dineroEn, dineroD; //Dinero
+	float dineroT = 0, dineroEn = 0, dineroD = 0, aux = 0; //Dinero
 	
 	//Archivo
 	FILE *archivomoney;
@@ -72,21 +66,39 @@ main(){
 		
 		//Menu del juego
 		switch(numerovalido){
-			case 1:	printf("===========================================\n");
-					printf("\tSU APUESTA \n");
+			case 1:	intentoA:
+					printf("===========================================\n");
+					printf("\t\tSU APUESTA \n");
+					printf("===========================================\n");
+					printf("\tMinimo: 5$, Maximo: 100$ \n");
 					printf("===========================================\n");
 					printf("Ingrese la cantidad para apostar: ");
 					scanf("%f", &dineroD);
+					aux = dineroD; //auxiliar 
+					if(dineroD < 5 || dineroD > 100){
+						system("cls");
+						printf("====================================================================\n");
+						printf("El monto ingresado para apostar no es valido, vuelvalo a intentar\n");
+						printf("====================================================================\n");
+						system("pause");
+						system("cls");
+						goto intentoA;
+					}
 					printf("$");
 					system("cls");
 					printf("===========================================\n");
-					printf("\tSU APUESTA ES DE \n");
-					printf("\t     %.2f$ \n",dineroD);
+					printf("\t    SU APUESTA ES DE \n");
+					printf("\t        %.2f$ \n",dineroD);
 					printf("===========================================\n");
 					apuesta = dineroD;//Intercambio
 					system("pause");
 					system("cls");
 					diaspartidas ++;
+					printf("===========================================\n");
+					printf("   PRESIONE ENTER PARA JALAR LA PALANCA\n");
+					printf("===========================================\n");
+					system("pause");
+					system("cls");
 					
 					//Roll
 					for (i = 0; i < 3; i++) //Hace las columnas filas
@@ -114,20 +126,31 @@ main(){
 					break;
 			
 			case 2: //Mensaje de como funciona o en que consiste el juego
+					printf("=================================================================================================\n");
+					printf("\t\t\t\t\t EN QUE CONSISTE EL JUEGO\n");
+					printf("=================================================================================================\n");
 					printf("\t El juego consiste en que el jugador acciona la palanca para comenzar el juego, \n");
 					printf("\t se veran 3 ruedas a traves del vidrio en las cuales habran distintas figuras \n");
 					printf("\t estas ruedas giraran una cantidad de tiempo y luego se detendran en una de las figuras \n");
 					printf("\t si se aciertan 3, ganas mas de lo apostado :) , de lo contrario pierdes tu apuesta :(  \n");
+					printf("=================================================================================================\n");
 					system("pause");
 					system("cls");
 					break;
 					
 			case 3: //ARCHIVO
-					printf("diaspartidas: %d dineroT:%.1f dineroD:%.1f dineroEn:%.1f", diaspartidas, dineroT, dineroD, dineroEn);
-					fprintf (archivomoney, "El registro de partidas diarias de hoy es de: %d partidas\n", diaspartidas);
+					dineroD = aux + aux;//suma de los auxiliares para devolver a la variable de dinero
+					printf("===========================================\n");
+					printf("\t REGISTRO DE LA MAQUINA\n");
+					printf("===========================================\n");
+					printf("\tPartidas jugadas: %d\n \tDinero del dia:%.1f\n \tDinero en la semana:%.1f\n \tDinero Total:%.1f\n \tPartidas Ganadas:%d\n \tPartidas Perdidas:%d\n", diaspartidas, dineroD, dineroEn, dineroT, win, fail);
+					printf("===========================================\n");
+					fprintf (archivomoney,"El registro de partidas diarias de hoy es de: %d partidas\n", diaspartidas);
 					fprintf(archivomoney,"El dinero ingresado hoy es de: %.1f$\n", dineroT);
 					fprintf(archivomoney,"El dinero de hoy ingresado por apuesta es de: %.1f$\n", dineroD);
 					fprintf(archivomoney,"El dinero entregado a ganadores hoy es de: %.1f$\n", dineroEn);
+					fprintf(archivomoney,"Partidas Ganadas:%d\n", win);
+					fprintf(archivomoney,"Partidas Perdidas:%d\n", fail);
 					fclose(archivomoney); //Se cierra el archivo
 					system("pause");
 					system("cls");
@@ -154,19 +177,30 @@ main(){
 		
 	}while(opc == 1);
 	//Vuelta al menu si el usuario lo desea
+	menu2:
 	printf("===========================================\n");
 	printf("\tQuiere volver a menu? \n");
 	printf("\t1. Si \n");
 	printf("\t2. No \n");
 	printf("===========================================\n");
 	printf("\tIngrese una de las opciones: ");
-	scanf("%d", &opc);
+	scanf("%s", opc);
+	n=validar_numero(opc);
 	system("cls");
-	if(opc == 1){
-		opc = 0;
+	numerovalido=atoi(opc);//Llamada al metodo para la validación
+	if(numerovalido > 2 || numerovalido < 1){
+		printf("======================================================================================\n");
+		printf("Opcion invalida, ingrese una opcion de las mostradas en pantalla, vuelvalo a intentar\n");
+		printf("======================================================================================\n");
+		system("pause");
+		system("cls");
+		goto menu2;
+	}
+	if(numerovalido == 1){
+		numerovalido = 0;
 		goto menu;
 	}
-	if(opc == 2){
+	if(numerovalido == 2){
 		goto salida;
 	}
 	
@@ -182,7 +216,9 @@ int validar_numero(char numero[]){
 	for(i=0; i<strlen(numero); i++){
 		if(!(isdigit(numero[i]))){ //condicional de si la variable ingresada es diferente de un numero entero como i, enviar mensaje de error
 			system("cls");
-			printf("Ingresa un solo numeros \n");
+			printf("===========================================\n");
+			printf("\tIngresa un solo numeros \n");
+			printf("===========================================\n");
 			system("pause");
 			system("cls");
 			return 0;
@@ -241,7 +277,7 @@ int busqueda(char **linea){
 	return match;
 }
 
-//Metodo vacio para los resultados del match
+//Metodo void para los resultados del match
 void matchwin(char **resultado) {
 	int matches = busqueda(resultado);
 
@@ -250,12 +286,14 @@ void matchwin(char **resultado) {
 			printf("\tIntente de nuevo \n");
 			printf("===========================================\n");
 			apuesta -= apuesta; //Resta toda la apuesta si pierde
+			fail ++;
 		}
 		
-		if (matches > 3)
+		if (matches == 3)
 		{
 			printf("\tLo lograste ganaste!! \n");
 			printf("===========================================\n");
-			apuesta += apuesta; //suma el doble si ganas
+			apuesta += apuesta; //Suma el doble si ganas
+			win ++;
 		}
 }
